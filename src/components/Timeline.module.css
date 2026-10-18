@@ -1,0 +1,120 @@
+/* Vertical timeline for experience and education. */
+
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--space-5);
+}
+
+/* The rail line and the marker on it. */
+.what {
+  position: relative;
+  padding: 0 0 var(--space-6) var(--space-5);
+  border-left: 1px solid var(--line-strong);
+}
+
+.entry:last-child .what {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.what::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: -6px;
+  width: 11px;
+  height: 11px;
+  background: var(--panel);
+  border: 2px solid var(--line-strong);
+  border-radius: 50%;
+}
+
+.current .what::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.when {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.dates {
+  font-size: 0.875rem;
+}
+
+.duration {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.title {
+  font-size: 1.0625rem;
+}
+
+.meta {
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.what ul {
+  max-width: var(--measure);
+  margin: var(--space-3) 0 0;
+  padding-left: 1.1em;
+}
+
+.what li + li {
+  margin-top: var(--space-2);
+}
+
+.what li::marker {
+  color: var(--text-muted);
+}
+
+@media (max-width: 767px) {
+  .entry {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+    padding-left: var(--space-5);
+    border-left: 1px solid var(--line-strong);
+  }
+
+  .entry:last-child {
+    border-left-color: transparent;
+  }
+
+  .entry + .entry {
+    padding-top: var(--space-5);
+  }
+
+  .when {
+    flex-direction: row;
+    gap: var(--space-3);
+    text-align: left;
+  }
+
+  .what,
+  .entry:last-child .what {
+    padding: 0;
+    border-left: 0;
+  }
+
+  .what::before {
+    top: 4px;
+    left: calc(-1 * var(--space-5) - 6px);
+  }
+}

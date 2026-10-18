@@ -1,0 +1,87 @@
+/* Home page: summary panels and shortcut tiles. */
+
+.name {
+  color: var(--accent-text);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 88px;
+  padding: var(--space-4);
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color var(--fast), background-color var(--fast);
+}
+
+.tile:hover {
+  border-color: var(--accent);
+  background: var(--panel-raised);
+}
+
+.tile:active {
+  transform: translateY(1px);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.tileText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.tileTitle {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tileLabel {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.arrow {
+  color: var(--text-muted);
+  transition: transform var(--fast);
+}
+
+.tile:hover .arrow {
+  color: var(--text);
+  transform: translateX(2px);
+}
+
+@media (max-width: 1000px) {
+  .grid,
+  .tiles {
+    grid-template-columns: 1fr;
+  }
+}

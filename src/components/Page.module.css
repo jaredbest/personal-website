@@ -1,0 +1,41 @@
+/* Standard page header: numbered label, heading and lead line. */
+
+.header {
+  margin-bottom: var(--space-6);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.index {
+  padding: 1px 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  color: var(--text);
+}
+
+.heading {
+  font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  max-width: var(--measure);
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.body {
+  display: grid;
+  gap: var(--space-5);
+}

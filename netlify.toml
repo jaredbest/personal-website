@@ -1,0 +1,14 @@
+# Netlify build settings. These override the settings in the Netlify UI.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# The build needs Node 22 or newer (see "engines" in package.json).
+[build.environment]
+  NODE_VERSION = "22"
+
+# Send every path to the app so deep links like /resume work on refresh.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

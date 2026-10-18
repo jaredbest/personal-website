@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jared Best</title>
+    <meta name="description" content="Jared Best, Product Engineer in Karlsruhe. Resume, projects and blog." />
+    <meta name="theme-color" content="#0a0d12" />
+    <meta property="og:title" content="Jared Best" />
+    <meta property="og:description" content="Product Engineer in Karlsruhe. Resume, projects and blog." />
+    <meta property="og:image" content="https://www.jaredbest.com/images/brand-image.png" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <script>
+      // Apply the saved display mode before first paint so the page never flashes.
+      // Also mark the first visit of a session so panels can play a short power-on fade.
+      try {
+        if (localStorage.getItem("theme") === "day") document.documentElement.dataset.theme = "day";
+        if (!sessionStorage.getItem("booted")) {
+          document.documentElement.dataset.boot = "";
+          sessionStorage.setItem("booted", "1");
+          setTimeout(() => delete document.documentElement.dataset.boot, 1200);
+        }
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <noscript>This site needs JavaScript.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

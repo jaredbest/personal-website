@@ -1,0 +1,97 @@
+/* Colours inside the window are the theme's own, so they stay the same in day and night mode. */
+
+.preview {
+  container-type: inline-size;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.window {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #242424;
+  border: 1px solid #000;
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+  font-family: var(--font-mono);
+  font-size: 2.7cqw;
+  line-height: 1.5;
+}
+
+.tabs {
+  display: flex;
+  background: #191919;
+}
+
+.tab {
+  padding: 0.3em 1em;
+  background: #1f1f1f;
+  border-bottom: 1px solid #a3d96d;
+  color: #c0c0c0;
+}
+
+.editor {
+  flex: 1;
+  padding: 0.4em 0;
+  overflow: hidden;
+  white-space: pre;
+}
+
+.line {
+  display: flex;
+}
+
+.active {
+  background: #292929;
+}
+
+.number {
+  flex: none;
+  width: 2.6em;
+  padding-right: 1em;
+  color: #a3a3a355;
+  text-align: right;
+}
+
+.active .number {
+  color: #a3a3a3;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1.1em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: #d6d6d6;
+}
+
+/* The theme's error colour, drawn as VS Code's wavy underline. */
+.error {
+  text-decoration: underline wavy #fb88b2;
+  text-underline-offset: 2px;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.15em 0.8em;
+  background: #191919;
+  color: #a3a3a3;
+  font-size: 0.9em;
+}
+
+.errorCount {
+  color: #fb88b2;
+}

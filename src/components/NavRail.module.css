@@ -1,0 +1,158 @@
+/* Main navigation: button column on desktop, bottom bar on phones. */
+
+.rail {
+  grid-area: rail;
+  position: sticky;
+  top: var(--status-height);
+  height: calc(100vh - var(--status-height));
+  padding: var(--space-4) var(--space-3);
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: 0 var(--space-3) 0 var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color var(--fast), color var(--fast);
+}
+
+.item:hover {
+  color: var(--text);
+  background: var(--panel-raised);
+}
+
+.item:active {
+  transform: translateY(1px);
+}
+
+/* Status light: lit on the current page. */
+.led {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  width: 3px;
+  height: 18px;
+  border-radius: 2px;
+  transform: translateY(-50%);
+}
+
+.item[aria-current="page"] {
+  color: var(--text);
+  background: var(--panel-raised);
+  border-color: var(--line-strong);
+}
+
+.item[aria-current="page"] .led {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.text {
+  flex: 1;
+}
+
+.key {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Email sits apart at the bottom of the rail. */
+.mail {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+
+.mail .item {
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+
+@media (max-width: 767px) {
+  .rail {
+    position: fixed;
+    inset: auto 0 0 0;
+    top: auto;
+    z-index: 50;
+    height: var(--bottom-bar-height);
+    padding: var(--space-1) var(--space-1) max(var(--space-1), env(safe-area-inset-bottom));
+    border-right: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .list {
+    flex-direction: row;
+    gap: 2px;
+  }
+
+  .list > li {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .item {
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    height: 100%;
+    min-height: var(--target);
+    padding: 0;
+    font-size: 0.625rem;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  .text {
+    flex: none;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .led {
+    left: 50%;
+    top: 0;
+    width: 18px;
+    height: 3px;
+    transform: translateX(-50%);
+  }
+
+  .key {
+    display: none;
+  }
+
+  .mail {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+}

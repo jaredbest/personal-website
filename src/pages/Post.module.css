@@ -1,0 +1,132 @@
+/* Single blog post: back link, article panel and long-form text styles. */
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-self: start;
+  min-height: var(--target);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.back:hover {
+  border-color: var(--accent);
+}
+
+.article {
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* Long-form reading: comfortable line length and spacing. Figures may use the full width. */
+.prose {
+  padding: var(--space-6);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+/* Text stays in a readable, left-aligned column; figures use the full width of the article. */
+.prose > :not(figure) {
+  max-width: var(--measure-wide);
+}
+
+.prose > * + * {
+  margin-top: var(--space-4);
+}
+
+.prose > h2 {
+  margin-top: var(--space-6);
+  font-size: 1.375rem;
+}
+
+.prose > :is(ol, ul) {
+  padding-left: 1.4em;
+}
+
+.prose > :is(ol, ul) > li + li {
+  margin-top: var(--space-2);
+}
+
+.prose > :is(ol, ul) > li > p + * {
+  margin-top: var(--space-2);
+}
+
+.prose img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* An italic line straight after an image reads as its caption. */
+.prose > p:has(> img) + p > em:only-child {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.prose a {
+  overflow-wrap: anywhere;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.prose th,
+.prose td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.prose th {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.prose code {
+  padding: 1px 5px;
+  background: var(--panel-raised);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 0.875em;
+}
+
+.prose pre {
+  margin-block: var(--space-3);
+  padding: var(--space-4);
+  overflow-x: auto;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line-strong);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.prose pre code {
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  .prose {
+    padding: var(--space-4);
+  }
+}

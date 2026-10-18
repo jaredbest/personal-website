@@ -1,0 +1,10 @@
+/* Placeholder while a page loads. */
+
+.loading {
+  padding: var(--space-6) 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}

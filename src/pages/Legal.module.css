@@ -1,0 +1,26 @@
+/* Legal notice and privacy page. */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.text {
+  display: grid;
+  gap: var(--space-3);
+  max-width: var(--measure);
+}
+
+.address {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

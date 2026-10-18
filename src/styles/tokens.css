@@ -1,0 +1,59 @@
+/* Design tokens. Night is the default; day mode swaps colours for bright rooms. */
+
+:root {
+  /* Night palette: off-black and off-white to cut glare. */
+  --bg: #0a0d12;
+  --grid: rgb(37 211 102 / 0.035);
+  --panel: #10151c;
+  --panel-raised: #161d27;
+  --line: #232c38;
+  --line-strong: #3a4757;
+  --text: #dfe5ec;
+  --text-muted: #9aa6b5;
+  --accent: #25d366;
+  --accent-text: #25d366;
+  --accent-soft: rgb(37 211 102 / 0.12);
+  --on-accent: #04130a;
+  --caution: #ffb000;
+  --caution-soft: rgb(255 176 0 / 0.1);
+  --scanline: rgb(255 255 255 / 0.012);
+  color-scheme: dark;
+
+  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --radius: 4px;
+  --status-height: 60px;
+  --rail-width: 224px;
+  --bottom-bar-height: 68px;
+  --target: 44px;
+  --measure: 42rem; /* about 70 characters of body text; rem keeps every element in a column aligned */
+  --measure-wide: 50rem; /* about 85 characters, for blog posts */
+  --fast: 80ms;
+}
+
+:root[data-theme="day"] {
+  --bg: #e8ecf0;
+  --grid: rgb(16 24 32 / 0.04);
+  --panel: #ffffff;
+  --panel-raised: #f2f5f7;
+  --line: #cfd6de;
+  --line-strong: #9eabb9;
+  --text: #121820;
+  --text-muted: #4b5765;
+  --accent: #25d366;
+  --accent-text: #0a7438;
+  --accent-soft: rgb(37 211 102 / 0.16);
+  --caution: #9a5b00;
+  --caution-soft: rgb(255 176 0 / 0.16);
+  --scanline: transparent;
+  color-scheme: light;
+}

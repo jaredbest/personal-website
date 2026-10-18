@@ -1,0 +1,21 @@
+/* Flag buttons for the language switch. */
+
+.flag {
+  padding: 0 var(--space-2);
+}
+
+.flag svg {
+  display: block;
+  border-radius: 1px;
+  outline: 1px solid rgb(127 127 127 / 0.35);
+}
+
+.flag[aria-pressed="false"] svg {
+  opacity: 0.45;
+  filter: grayscale(0.6);
+}
+
+.flag:hover svg {
+  opacity: 1;
+  filter: none;
+}
