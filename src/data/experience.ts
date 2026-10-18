@@ -4,9 +4,15 @@ import type { Role } from "./types";
 export const experience: Role[] = [
   {
     company: "ioki",
-    title: { en: "Product Engineer | Platform Engineering", de: "Product Engineer | Platform Engineering" },
+    title: {
+      en: "Product Engineer | Platform Engineering",
+      de: "Product Engineer | Platform Engineering",
+    },
     start: "2023-07",
-    location: { en: "Frankfurt am Main, Germany", de: "Frankfurt am Main, Deutschland" },
+    location: {
+      en: "Frankfurt am Main, Germany",
+      de: "Frankfurt am Main, Deutschland",
+    },
     workMode: "hybrid",
     employment: "full-time",
     highlights: [
@@ -52,19 +58,19 @@ export const experience: Role[] = [
       },
     ],
   },
-  {
-    company: "Caelo Labs (Freelance)",
-    title: { en: "C# / Unity Developer", de: "C#-/Unity-Entwickler" },
-    start: "2020-09",
-    location: { en: "Karlsruhe, Germany", de: "Karlsruhe, Deutschland" },
-    employment: "part-time",
-    highlights: [
-      {
-        en: "Built and published Vissity, a Unity asset, as sole developer, and continue to maintain it and support customers through a dedicated Discord server",
-        de: "Entwicklung und Veröffentlichung von Vissity, einem Unity-Asset, als alleiniger Entwickler – inklusive laufender Pflege und Kundensupport über einen eigenen Discord-Server",
-      },
-    ],
-  },
+  // {
+  //   company: "Caelo Labs (Freelance)",
+  //   title: { en: "C# / Unity Developer", de: "C#-/Unity-Entwickler" },
+  //   start: "2020-09",
+  //   location: { en: "Karlsruhe, Germany", de: "Karlsruhe, Deutschland" },
+  //   employment: "part-time",
+  //   highlights: [
+  //     {
+  //       en: "Built and published Vissity, a Unity asset, as sole developer, and continue to maintain it and support customers through a dedicated Discord server",
+  //       de: "Entwicklung und Veröffentlichung von Vissity, einem Unity-Asset, als alleiniger Entwickler – inklusive laufender Pflege und Kundensupport über einen eigenen Discord-Server",
+  //     },
+  //   ],
+  // },
   {
     company: "GIRO",
     title: { en: "Solutions Developer", de: "Solutions Developer" },
@@ -173,7 +179,10 @@ export const experience: Role[] = [
   },
   {
     company: "Technical University of Munich",
-    title: { en: "English Writing Center Fellow", de: "English Writing Center Fellow" },
+    title: {
+      en: "English Writing Center Fellow",
+      de: "English Writing Center Fellow",
+    },
     start: "2015-04",
     end: "2018-01",
     location: { en: "Munich, Germany", de: "München, Deutschland" },
@@ -212,7 +221,10 @@ export const experience: Role[] = [
     title: { en: "Course Assistant", de: "Tutor" },
     start: "2014-09",
     end: "2014-12",
-    location: { en: "Waterloo, Ontario, Canada", de: "Waterloo, Ontario, Kanada" },
+    location: {
+      en: "Waterloo, Ontario, Canada",
+      de: "Waterloo, Ontario, Kanada",
+    },
     employment: "part-time",
     highlights: [
       {
@@ -248,7 +260,10 @@ export const experience: Role[] = [
     title: { en: "Environmental Engineer", de: "Umweltingenieur" },
     start: "2013-05",
     end: "2013-08",
-    location: { en: "Lancaster, New York, USA", de: "Lancaster, New York, USA" },
+    location: {
+      en: "Lancaster, New York, USA",
+      de: "Lancaster, New York, USA",
+    },
     workMode: "onsite",
     employment: "full-time",
     highlights: [
@@ -264,10 +279,16 @@ export const experience: Role[] = [
   },
   {
     company: "Bergmann Associates",
-    title: { en: "Environmental Summer Intern", de: "Praktikant Umwelt (Sommer)" },
+    title: {
+      en: "Environmental Summer Intern",
+      de: "Praktikant Umwelt (Sommer)",
+    },
     start: "2012-06",
     end: "2012-08",
-    location: { en: "Rochester, New York, USA", de: "Rochester, New York, USA" },
+    location: {
+      en: "Rochester, New York, USA",
+      de: "Rochester, New York, USA",
+    },
     workMode: "onsite",
     employment: "full-time",
     highlights: [
