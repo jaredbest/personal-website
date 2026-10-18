@@ -5,13 +5,14 @@ import { Flag } from "./Flag";
 import styles from "./LanguageSwitch.module.css";
 import { Segmented } from "./Segmented";
 
-export function LanguageSwitch() {
+export function LanguageSwitch({ className }: { className?: string }) {
   const { lang, setLang, t } = useLanguage();
   return (
     <Segmented<Lang>
       label={t.status.language}
       value={lang}
       onChange={setLang}
+      className={className}
       buttonClassName={styles.flag}
       options={[
         { value: "en", label: <Flag lang="en" />, name: "English", lang: "en" },
