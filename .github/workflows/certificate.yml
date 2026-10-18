@@ -1,0 +1,28 @@
+# Fails if the HTTPS certificate for the site has less than 20 days left, so a stuck renewal gets noticed.
+# Netlify renews about 30 days before expiry; checking twice a month always catches a missed renewal in time.
+name: Certificate
+
+on:
+  schedule:
+    - cron: "0 7 1,15 * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        host: [jaredbest.com, www.jaredbest.com]
+    steps:
+      - name: Check days left
+        run: |
+          end=$(echo | openssl s_client -connect "${{ matrix.host }}:443" -servername "${{ matrix.host }}" 2>/dev/null \
+            | openssl x509 -noout -enddate | cut -d= -f2)
+          days=$(( ($(date -d "$end" +%s) - $(date +%s)) / 86400 ))
+          echo "${{ matrix.host }}: certificate expires $end ($days days left)"
+          if [ "$days" -lt 20 ]; then
+            echo "::error::Certificate for ${{ matrix.host }} expires in $days days. Check HTTPS in Netlify domain management."
+            exit 1
+          fi
