@@ -1,0 +1,42 @@
+.window {
+  --slot: 46cqw;
+  container-type: inline-size;
+  position: relative;
+  height: 100%;
+  min-height: 135px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* Fade the edges so charts slide in and out of view softly. */
+.window::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--bg), transparent 18%, transparent 82%, var(--bg));
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* Centre the active chart: start half a slot in from the middle, then step left one slot per chart. */
+  transform: translateX(calc(50cqw - var(--slot) / 2 - var(--position) * var(--slot)));
+  transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.track > li {
+  flex: none;
+  width: var(--slot);
+  padding: 6%;
+  opacity: 0.45;
+  transition: opacity 400ms;
+}
+
+.track > .current {
+  opacity: 1;
+}

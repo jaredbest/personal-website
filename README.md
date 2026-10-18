@@ -1,83 +1,101 @@
 <div align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/jaredbest/personal-website-v3/master/images/logo.png" width="100" />
+  <img alt="Logo" src="https://raw.githubusercontent.com/jaredbest/personal-website-v3/main/images/logo.png" width="100" />
 </div>
 <h1 align="center">
-  jaredbest.com - v3
+  jaredbest.com
 </h1>
 <p align="center">
-  The second iteration of <a href="https://www.jaredbest.com/" target="_blank">www.jaredbest.com</a>; built with <a href="https://reactjs.org/" target="_blank">React</a> and hosted on <a href="https://www.netlify.com/" target="_blank">Netlify</a>.
+  The source of <a href="https://www.jaredbest.com/" target="_blank">www.jaredbest.com</a>, built with <a href="https://react.dev/" target="_blank">React</a> and hosted on <a href="https://www.netlify.com/" target="_blank">Netlify</a>.
 </p>
 <p align="center">
-  <a href="https://api.netlify.com/api/v1/badges/d441277c-1795-40d4-93d6-ae8f0f8be657/deploy-status">
+  <a href="https://app.netlify.com/">
     <img src="https://api.netlify.com/api/v1/badges/d441277c-1795-40d4-93d6-ae8f0f8be657/deploy-status" alt="Netlify Status" />
   </a>
 </p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🛰️ About
 
-## Available Scripts
+A personal site that looks and works like an operator console:
+- A status bar with clocks, a nav rail with number-key shortcuts and day/night display modes.
+- English and German, switched with the flags in the top bar.
+- Resume, projects, blog and an Impressum.
 
-In the project directory, you can run:
+Built with React 19, TypeScript, Vite and plain CSS Modules. No trackers, no cookies, no third-party requests.
 
-### `npm start`
+## 🚀 Quick start
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You need Node.js 22 or newer.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```sh
+npm install
+npm run dev
+```
 
-### `npm test`
+Open http://localhost:5173.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In VS Code you can also run the **dev** and **build** tasks from *Terminal → Run Task*.
 
-### `npm run build`
+## 🧭 Project layout
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+src/
+  App.tsx, routes.tsx, nav.ts   app shell, pages and the nav order
+  components/                   console frame, panels, switches, charts and card previews
+  pages/                        one file per page
+  data/                         CV, skills, projects and post list
+  content/posts/                blog posts (name.md and name.de.md) and their chart data
+  lib/                          small helpers: dates, motion, map and chart maths
+  i18n/                         language switch and interface wording
+  styles/                       design tokens and global styles
+  test/                         Vitest tests
+scripts/                        data builders (see below)
+public/images/                  photos and project images
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## ✏️ Editing content
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| To change | Edit |
+|---|---|
+| Name, bio, links, languages | `src/data/profile.ts` |
+| Jobs | `src/data/experience.ts` |
+| Schools | `src/data/education.ts` |
+| Skills | `src/data/skills.ts` |
+| Certifications, publications | `src/data/credentials.ts` |
+| Projects | `src/data/projects.ts` |
+| Blog posts | `src/data/posts.ts` and `src/content/posts/` |
+| Buttons, labels, headings | `src/i18n/ui.ts` |
 
-### `npm run eject`
+Every text has an English (`en`) and a German (`de`) version. Update both.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Writing rules live in `.claude/skills/site-writing/SKILL.md`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🗺️ Rebuilding the Ticonderoga map
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The "Mapping Ticonderoga" post replays your OpenStreetMap edits. After more mapping, rebuild its data:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```sh
+python3 scripts/ticonderoga_edits.py
+```
 
-## Learn More
+It needs only Python 3.10+. Downloads are cached in `.cache/osm`, so later runs fetch only new changesets.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🧪 Checks
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+npm run typecheck   # TypeScript
+npm run lint        # ESLint
+npm test            # Vitest tests
+npm run build       # production build in dist/
+npm run preview     # serve the build locally
+```
 
-### Code Splitting
+## 🌍 Deploy
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Netlify builds every push to `main`. The settings live in `netlify.toml`:
+- Build command: `npm run build`
+- Publish folder: `dist`
+- All paths go to `index.html`, so links like `/resume` work on refresh.
 
-### Analyzing the Bundle Size
+## ⚖️ Legal
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The Impressum and privacy notice are in `src/pages/Legal.tsx`. Keep them up to date if your address changes or if the site starts loading anything from another service.
