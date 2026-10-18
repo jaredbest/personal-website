@@ -20,7 +20,21 @@ A personal site that looks and works like an operator console:
 - English and German, switched with the flags in the top bar.
 - Resume, projects, blog and an Impressum.
 
-Built with React 19, TypeScript, Vite and plain CSS Modules. No trackers, no cookies, no third-party requests.
+No trackers, no cookies, no third-party requests.
+
+## 🧰 Tech stack
+
+| Area | Tools |
+|---|---|
+| App | React 19, TypeScript, React Router |
+| Build | Vite |
+| Styling | CSS Modules and design tokens, self-hosted Inter and JetBrains Mono fonts |
+| Content | Markdown posts rendered with markdown-to-jsx, Lucide icons |
+| Unit tests | Vitest and Testing Library |
+| Browser tests | Playwright and axe, in Chromium and WebKit on phone and desktop sizes |
+| Code checks | ESLint with typescript-eslint and the React Hooks rules |
+| CI | GitHub Actions runs every check on each pull request |
+| Hosting | Netlify |
 
 ## 🚀 Quick start
 
@@ -48,6 +62,7 @@ src/
   i18n/                         language switch and interface wording
   styles/                       design tokens and global styles
   test/                         Vitest tests
+e2e/                            Playwright browser tests
 scripts/                        data builders (see below)
 public/images/                  photos and project images
 ```
@@ -86,8 +101,13 @@ npm run typecheck   # TypeScript
 npm run lint        # ESLint
 npm test            # Vitest tests
 npm run build       # production build in dist/
+npm run test:e2e    # browser tests against the build (run build first)
 npm run preview     # serve the build locally
 ```
+
+The first time, install the test browsers with `npx playwright install chromium webkit`.
+
+GitHub Actions runs all of these except `preview` on every pull request.
 
 ## 🌍 Deploy
 

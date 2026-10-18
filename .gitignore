@@ -4,8 +4,10 @@
 # Build output
 /dist
 
-# Test coverage
+# Test coverage and browser test output
 /coverage
+/test-results
+/playwright-report
 
 # Local env files
 .env*.local

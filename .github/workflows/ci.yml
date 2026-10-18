@@ -1,4 +1,4 @@
-# Checks every pull request and push to main: types, lint, tests and build.
+# Checks every pull request and push to main: types, lint, tests, build and browser tests.
 name: CI
 
 on:
@@ -28,3 +28,5 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run test:e2e
