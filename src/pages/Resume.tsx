@@ -1,4 +1,5 @@
 // Resume: summary, skills, experience, education, certifications, publication and languages.
+import { KeyFacts } from "../components/KeyFacts";
 import { Page } from "../components/Page";
 import { Panel } from "../components/Panel";
 import { Readout, Readouts } from "../components/Readouts";
@@ -54,12 +55,7 @@ export function Resume() {
           <p className={styles.summary}>{pick(profile.summary)}</p>
         </Panel>
         <Panel title={r.keyFacts}>
-          <Readouts>
-            <Readout label={t.home.currentRole}>{pick(profile.role)}</Readout>
-            <Readout label={t.home.experience}>{t.home.years(profile.yearsInSoftware)}</Readout>
-            <Readout label={t.home.studying}>{pick(profile.studying)}</Readout>
-            <Readout label={t.home.location}>{pick(profile.location)}</Readout>
-          </Readouts>
+          <KeyFacts />
         </Panel>
       </div>
 

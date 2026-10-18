@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 import { Page } from "../components/Page";
 import { Panel } from "../components/Panel";
-import { Readout, Readouts } from "../components/Readouts";
+import { KeyFacts } from "../components/KeyFacts";
 import { SocialLinks } from "../components/SocialLinks";
 import { experience } from "../data/experience";
 import { posts } from "../data/posts";
@@ -34,15 +34,7 @@ export function Home() {
     >
       <div className={styles.grid}>
         <Panel title={t.home.atAGlance}>
-          <Readouts>
-            <Readout label={t.home.currentRole}>{pick(profile.role)}</Readout>
-            <Readout label={t.home.experience}>{t.home.years(profile.yearsInSoftware)}</Readout>
-            <Readout label={t.home.studying}>{pick(profile.studying)}</Readout>
-            <Readout label={t.home.location}>{pick(profile.location)}</Readout>
-            <Readout label={t.home.languages}>
-              {profile.languages.map(({ name, level }) => `${pick(name)} (${pick(level)})`).join(", ")}
-            </Readout>
-          </Readouts>
+          <KeyFacts withLanguages />
         </Panel>
 
         <Panel title={t.home.profiles}>

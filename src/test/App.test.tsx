@@ -55,6 +55,12 @@ describe("console", () => {
     expect(router.state.location.pathname).toBe("/resume");
   });
 
+  it("sends old /contact links to About", async () => {
+    const router = renderAt("/contact");
+    expect(await screen.findByRole("heading", { level: 1 })).toHaveTextContent("About me");
+    expect(router.state.location.pathname).toBe("/about");
+  });
+
   it("ignores number keys while a dialog is open", async () => {
     const router = renderAt("/about");
     await userEvent.click(screen.getByRole("button", { name: /enlarge photo/i }));

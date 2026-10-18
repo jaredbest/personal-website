@@ -1,3 +1,5 @@
+/* Ticonderoga edit replay: map display, playback controls and counters. */
+
 .figure {
   display: grid;
   gap: var(--space-3);

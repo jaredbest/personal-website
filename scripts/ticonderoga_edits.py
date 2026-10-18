@@ -8,7 +8,9 @@ Steps:
 1. Look up the town and village boundaries (Nominatim).
 2. List every changeset by the user inside the town's bounding box (OSM API).
 3. Download each changeset once into .cache/osm (re-runs only fetch new ones).
-4. Keep only the features the user *created* inside the town boundary, and write:
+4. Fetch positions of nodes that the user's new roads connect to but that other mappers created,
+   so those roads keep their real shape (cached in .cache/osm/nodes.json).
+5. Keep only the features the user *created* inside the town boundary, and write:
    - src/content/posts/ticonderoga-edits.json   (full replay on the post page)
    - src/content/posts/ticonderoga-preview.json (small village-only file for the blog card)
 
@@ -19,6 +21,7 @@ Kinds: b = building, r = road or path, a = land use, o = other line, p = tagged 
 
 import json
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -78,6 +81,44 @@ def download(changesets: list[dict]) -> None:
         time.sleep(1)
 
 
+def read_changeset(changeset: dict):
+    path = CACHE / f"{changeset['id']}.osc"
+    return ET.parse(path).getroot() if path.exists() else None
+
+
+def fetch_foreign_nodes(changesets: list[dict]) -> dict[str, tuple[float, float]]:
+    """Positions of nodes used by the user's new ways that the user did not create or move themselves."""
+    own, used = set(), set()
+    for changeset in changesets:
+        root = read_changeset(changeset)
+        if root is None:
+            continue
+        own.update(node.get("id") for block in root for node in block.findall("node") if node.get("lat"))
+        used.update(nd.get("ref") for block in root.findall("create") for way in block.findall("way") for nd in way.findall("nd"))
+
+    cache_file = CACHE / "nodes.json"
+    known = json.loads(cache_file.read_text()) if cache_file.exists() else {}
+    missing = sorted(used - own - set(known))
+
+    def fetch(ids: list[str]) -> None:
+        url = "https://api.openstreetmap.org/api/0.6/nodes.json?nodes=" + ",".join(ids)
+        try:
+            for element in get_json(url)["elements"]:
+                if "lat" in element:  # deleted nodes have no position
+                    known[str(element["id"])] = [element["lon"], element["lat"]]
+        except urllib.error.HTTPError:
+            # One unknown id fails the whole batch; split it until the bad id is on its own.
+            if len(ids) > 1:
+                fetch(ids[: len(ids) // 2])
+                fetch(ids[len(ids) // 2 :])
+        time.sleep(1)
+
+    for start in range(0, len(missing), 400):
+        fetch(missing[start : start + 400])
+    cache_file.write_text(json.dumps(known))
+    return {node_id: tuple(position) for node_id, position in known.items()}
+
+
 def point_in_ring(lon: float, lat: float, ring: list[list[float]]) -> bool:
     """Ray-casting test: is the point inside the polygon?"""
     inside = False
@@ -106,18 +147,20 @@ def encode(points: list[tuple[int, int]]) -> list[int]:
     return flat
 
 
-def build_replay(changesets: list[dict], ring: list[list[float]], village_bbox: list[str]) -> dict:
+def build_replay(
+    changesets: list[dict], ring: list[list[float]], village_bbox: list[str], foreign: dict[str, tuple[float, float]]
+) -> dict:
     west = min(p[0] for p in ring)
     south = min(p[1] for p in ring)
     grid = lambda lon, lat: (round((lon - west) * 1e5), round((lat - south) * 1e5))
 
-    coords: dict[str, tuple[float, float]] = {}
+    # Start with other mappers' nodes; the user's own nodes are added (and moved) as their changesets play.
+    coords: dict[str, tuple[float, float]] = dict(foreign)
     steps, features = [], []
     for changeset in changesets:
-        path = CACHE / f"{changeset['id']}.osc"
-        if not path.exists():
+        root = read_changeset(changeset)
+        if root is None:
             continue
-        root = ET.parse(path).getroot()
         # Remember every node position first, so ways can be drawn even if their nodes came earlier.
         for block in root:
             for node in block.findall("node"):
@@ -181,7 +224,8 @@ def main() -> None:
     print(f"{len(changesets)} changesets")
     download(changesets)
 
-    replay = build_replay(changesets, ring, village["boundingbox"])
+    foreign = fetch_foreign_nodes(changesets)
+    replay = build_replay(changesets, ring, village["boundingbox"], foreign)
     preview = build_preview(replay)
     for name, data in (("ticonderoga-edits.json", replay), ("ticonderoga-preview.json", preview)):
         (OUT / name).write_text(json.dumps(data, separators=(",", ":")))

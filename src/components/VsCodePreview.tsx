@@ -76,22 +76,30 @@ const TOTAL = code.reduce((sum, line) => sum + lineLength(line), 0);
 /** Which characters are visible after `typed` keystrokes, and where the cursor sits. */
 function layout(typed: number) {
   let budget = typed;
-  let cursor = { line: 0, column: 0 };
-  const lines = code.map((line, index) => {
+  const lines = code.map((line) => {
     const tokens: { text: string; color: string; error?: boolean }[] = [];
-    let column = 0;
     for (const { text, color, error } of line) {
       if (budget <= 0) break;
       const shown = text.slice(0, budget);
       budget -= shown.length;
-      column += shown.length;
       tokens.push({ text: shown, color: theme[color], error: error && shown.length === text.length });
     }
-    if (budget > 0 || column > 0) cursor = { line: index, column };
     budget -= 1; // the line break
     return tokens;
   });
-  return { lines, cursor };
+  return { lines, cursor: cursorAt(typed) };
+}
+
+/** Line and column after `typed` characters. A typed line break puts the cursor at the start of the next line. */
+function cursorAt(typed: number): { line: number; column: number } {
+  let remaining = typed;
+  for (let line = 0; line < code.length; line++) {
+    const length = lineLength(code[line]!) - 1;
+    if (remaining <= length) return { line, column: remaining };
+    remaining -= length + 1;
+  }
+  const last = code.length - 1;
+  return { line: last, column: lineLength(code[last]!) - 1 };
 }
 
 export function VsCodePreview() {

@@ -1,3 +1,5 @@
+/* Labelled clock in the status bar. */
+
 .clock {
   display: flex;
   flex-direction: column;

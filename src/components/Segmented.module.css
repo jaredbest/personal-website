@@ -1,3 +1,5 @@
+/* Segmented selector switch shared by the status bar, charts and map. */
+
 .group {
   display: flex;
   flex-wrap: wrap;

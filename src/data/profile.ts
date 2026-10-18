@@ -1,5 +1,5 @@
 // Who I am: the facts shown on Home and About.
-import type { Profile } from "./types";
+import type { Profile, Text } from "./types";
 
 export const profile: Profile = {
   name: "Jared Best",
@@ -48,3 +48,8 @@ export const profile: Profile = {
     },
   },
 };
+
+/** "English (Native), German (C1)" in the current language. */
+export function formatLanguages(pick: (text: Text) => string): string {
+  return profile.languages.map(({ name, level }) => `${pick(name)} (${pick(level)})`).join(", ");
+}

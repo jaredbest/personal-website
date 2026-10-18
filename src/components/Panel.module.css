@@ -1,3 +1,5 @@
+/* Framed display panel with header bar and corner brackets. */
+
 .panel {
   position: relative;
   background: var(--panel);

@@ -1,3 +1,5 @@
+/* App frame: status bar, nav rail and main area; the rail becomes a bottom bar on phones. */
+
 .console {
   display: grid;
   grid-template-columns: var(--rail-width) minmax(0, 1fr);

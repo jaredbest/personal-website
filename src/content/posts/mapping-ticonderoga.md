@@ -9,8 +9,8 @@ I mapped in two bursts: spring 2020, and again from autumn 2024 into January 202
 ## What I added
 
 - **3,535 buildings**, traced from aerial imagery
-- **888 roads and paths** (39 km), including sidewalks, driveways and service roads
-- **353 land-use areas**, such as farmland, residential areas and parks
+- **897 roads and paths** (45 km), including sidewalks, driveways and service roads
+- **358 land-use areas**, such as farmland, residential areas and parks
 - **3,809 point features**, such as utility poles, stop signs and shops
 
 ## How the replay works

@@ -1,3 +1,5 @@
+/* Standard page header: numbered label, heading and lead line. */
+
 .header {
   margin-bottom: var(--space-6);
 }

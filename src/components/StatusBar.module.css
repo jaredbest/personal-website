@@ -1,3 +1,5 @@
+/* Top status bar: identity, clocks and display controls. */
+
 .bar {
   grid-area: status;
   position: sticky;

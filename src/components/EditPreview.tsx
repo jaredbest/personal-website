@@ -1,7 +1,7 @@
 // Card preview for the Ticonderoga post: the village fills in with my buildings and roads in under five seconds.
 // Plays once when seen and again on hover or focus. Loads its small data file only when near the screen.
 import { useCallback, useEffect, useRef, useState } from "react";
-import { decodeDeltas, onThemeChange, X_SCALE } from "../lib/editMap";
+import { decodeDeltas, watchCanvas, X_SCALE } from "../lib/editMap";
 import { animate, prefersReducedMotion, useCardPlayback, useSeen } from "../lib/motion";
 import styles from "./EditPreview.module.css";
 
@@ -34,12 +34,15 @@ export function EditPreview() {
   const [data, setData] = useState<{ size: [number, number]; steps: number; shapes: Shape[] } | null>(null);
   // Stops the running animation, if any.
   const stop = useRef(() => {});
+  // The last frame drawn, so a resize or mode change can repaint it.
+  const lastFrame = useRef(0);
 
   const draw = useCallback(
     (upTo: number) => {
       const el = canvas.current;
       const box = ref.current;
       if (!el || !box || !data) return;
+      lastFrame.current = upTo;
       const ctx = el.getContext("2d");
       if (!ctx) return;
       const css = getComputedStyle(el);
@@ -115,10 +118,10 @@ export function EditPreview() {
 
   useCardPlayback(ref, play, Boolean(data));
 
-  // Repaint the finished map when the display mode changes, and stop any animation on unmount.
+  // Repaint on resize or display-mode change, and stop any animation on unmount.
   useEffect(() => {
-    if (!data) return;
-    return onThemeChange(() => draw(data.steps + GLOW_STEPS));
+    if (!data || !ref.current) return;
+    return watchCanvas(ref.current, () => draw(lastFrame.current));
   }, [data, draw]);
   useEffect(() => () => stop.current(), []);
 

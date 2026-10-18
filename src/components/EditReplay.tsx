@@ -4,7 +4,7 @@ import { Pause, Play, RotateCcw } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "../i18n/language";
 import { formatDate } from "../lib/dates";
-import { decodeDeltas, onThemeChange, X_SCALE } from "../lib/editMap";
+import { decodeDeltas, watchCanvas, X_SCALE } from "../lib/editMap";
 import { animate, prefersReducedMotion, useSeen } from "../lib/motion";
 import { Segmented } from "./Segmented";
 import styles from "./EditReplay.module.css";
@@ -207,20 +207,16 @@ export function EditReplay() {
   }, [draw, step]);
 
   useEffect(() => {
-    const redraw = () => draw(stepRef.current);
-    const resize = "ResizeObserver" in window ? new ResizeObserver(redraw) : null;
-    if (canvas.current?.parentElement) resize?.observe(canvas.current.parentElement);
-    const stopWatchingTheme = onThemeChange(redraw);
-    return () => {
-      resize?.disconnect();
-      stopWatchingTheme();
-    };
+    const box = canvas.current?.parentElement;
+    if (!box) return;
+    return watchCanvas(box, () => draw(stepRef.current));
   }, [draw]);
 
   // Play by itself the first time the map is on screen, until the user takes over.
   const seen = useSeen(wrapper, { threshold: 0.5 });
   const autoplay = seen && data !== null && !prefersReducedMotion();
-  const playing = choice ?? autoplay;
+  // With a single step there is nothing to animate.
+  const playing = (choice ?? autoplay) && lastStep > 0;
 
   // Advance through the steps while playing. Starting from the end replays from the beginning.
   useEffect(() => {

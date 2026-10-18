@@ -1,3 +1,5 @@
+/* London street-orientation charts: grid, polar charts and their sweep-in animation. */
+
 .figure {
   display: grid;
   gap: var(--space-4);

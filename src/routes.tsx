@@ -1,6 +1,6 @@
 // Every page on the site, all inside the console frame.
 import { lazy, Suspense } from "react";
-import type { RouteObject } from "react-router";
+import { Navigate, type RouteObject } from "react-router";
 import { Console } from "./components/Console";
 import { PageLoading } from "./components/PageLoading";
 import { About } from "./pages/About";
@@ -33,6 +33,8 @@ export const routes: RouteObject[] = [
         ),
       },
       { path: "/legal", element: <Legal /> },
+      // The old site had a contact page; its email address now lives on About.
+      { path: "/contact", element: <Navigate to="/about" replace /> },
       { path: "*", element: <NotFound /> },
     ],
   },

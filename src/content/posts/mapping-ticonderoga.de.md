@@ -9,8 +9,8 @@ Ich habe in zwei Phasen kartiert: im Frühjahr 2020 und wieder vom Herbst 2024 b
 ## Was ich ergänzt habe
 
 - **3.535 Gebäude**, abgezeichnet aus Luftbildern
-- **888 Straßen und Wege** (39 km), darunter Gehwege, Zufahrten und Erschließungsstraßen
-- **353 Flächen**, etwa Ackerland, Wohngebiete und Parks
+- **897 Straßen und Wege** (45 km), darunter Gehwege, Zufahrten und Erschließungsstraßen
+- **358 Flächen**, etwa Ackerland, Wohngebiete und Parks
 - **3.809 Punktobjekte**, etwa Strommasten, Stoppschilder und Geschäfte
 
 ## So funktioniert die Wiedergabe

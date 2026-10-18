@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Page } from "../components/Page";
 import { Panel } from "../components/Panel";
 import { Readout, Readouts } from "../components/Readouts";
-import { profile } from "../data/profile";
+import { formatLanguages, profile } from "../data/profile";
 import { useLanguage } from "../i18n/language";
 import styles from "./About.module.css";
 
@@ -40,7 +40,7 @@ export function About() {
             <Readout label={t.about.name}>{profile.name}</Readout>
             <Readout label={t.about.nationality}>{pick(profile.nationality)}</Readout>
             <Readout label={t.about.languages}>
-              {profile.languages.map(({ name, level }) => `${pick(name)} (${pick(level)})`).join(", ")}
+              {formatLanguages(pick)}
             </Readout>
             <Readout label={t.about.location}>{pick(profile.location)}</Readout>
             <Readout label={t.about.email}>

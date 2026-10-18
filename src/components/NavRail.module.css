@@ -1,3 +1,5 @@
+/* Main navigation: button column on desktop, bottom bar on phones. */
+
 .rail {
   grid-area: rail;
   position: sticky;

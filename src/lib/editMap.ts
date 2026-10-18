@@ -16,9 +16,20 @@ export function decodeDeltas(coords: number[]): number[] {
   return points;
 }
 
-/** Calls `redraw` whenever the day/night display mode changes. Returns a cleanup function. */
-export function onThemeChange(redraw: () => void): () => void {
-  const observer = new MutationObserver(redraw);
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-  return () => observer.disconnect();
+/**
+ * Calls `redraw` whenever a canvas needs repainting: its box is resized, the window changes size
+ * (height matters too, e.g. a phone's address bar), or the day/night display mode changes.
+ * Returns a cleanup function.
+ */
+export function watchCanvas(box: Element, redraw: () => void): () => void {
+  const resize = "ResizeObserver" in window ? new ResizeObserver(redraw) : null;
+  resize?.observe(box);
+  window.addEventListener("resize", redraw);
+  const theme = new MutationObserver(redraw);
+  theme.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => {
+    resize?.disconnect();
+    window.removeEventListener("resize", redraw);
+    theme.disconnect();
+  };
 }
