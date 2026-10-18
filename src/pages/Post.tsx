@@ -37,7 +37,15 @@ export function Post() {
       </Link>
       <article data-panel className={styles.article}>
         <div className={styles.prose}>
-          <Markdown options={{ wrapper: Fragment, overrides: { EditReplay, StreetOrientations } }}>{body}</Markdown>
+          <Markdown
+            options={{
+              wrapper: Fragment,
+              // Code blocks can scroll sideways on phones, so they must be reachable by keyboard.
+              overrides: { EditReplay, StreetOrientations, pre: { props: { tabIndex: 0 } } },
+            }}
+          >
+            {body}
+          </Markdown>
         </div>
       </article>
     </Page>
