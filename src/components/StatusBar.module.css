@@ -55,6 +55,11 @@
   gap: var(--space-3);
 }
 
+/* Keep each switch on one row; the bar is too short for a second. */
+.switch {
+  flex-wrap: nowrap;
+}
+
 @media (max-width: 1100px) {
   .role {
     display: none;
@@ -75,8 +80,13 @@
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 419px) {
+  /* No room for the name next to both switches. Hidden visually only, so the home link keeps its name. */
   .name {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
   }
 }

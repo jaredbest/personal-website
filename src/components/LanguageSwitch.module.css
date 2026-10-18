@@ -19,3 +19,10 @@
   opacity: 1;
   filter: none;
 }
+
+@media (max-width: 767px) {
+  .flag svg {
+    width: auto;
+    height: 13px;
+  }
+}

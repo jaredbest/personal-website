@@ -22,8 +22,8 @@ export function StatusBar() {
         <Clock label={t.status.utc} timeZone="UTC" />
       </div>
       <div className={styles.controls}>
-        <LanguageSwitch />
-        <ModeSwitch />
+        <LanguageSwitch className={styles.switch} />
+        <ModeSwitch className={styles.switch} />
       </div>
     </header>
   );
