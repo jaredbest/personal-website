@@ -13,6 +13,11 @@
   </a>
 </p>
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="images/screenshot-night.png" />
+  <img alt="The home page of jaredbest.com" src="images/screenshot-day.png" />
+</picture>
+
 ## 🛰️ About
 
 A personal site that looks and works like an operator console:
@@ -34,6 +39,7 @@ No trackers, no cookies, no third-party requests.
 | Browser tests | Playwright and axe, in Chromium and WebKit on phone and desktop sizes |
 | Code checks | ESLint with typescript-eslint and the React Hooks rules |
 | CI | GitHub Actions runs every check on each pull request |
+| Updates | Dependabot opens weekly pull requests for npm packages and GitHub Actions |
 | Hosting | Netlify |
 
 ## 🚀 Quick start
@@ -115,6 +121,12 @@ Netlify builds every push to `main`. The settings live in `netlify.toml`:
 - Build command: `npm run build`
 - Publish folder: `dist`
 - All paths go to `index.html`, so links like `/resume` work on refresh.
+- Security headers, including a Content-Security-Policy that only allows files from this site.
+- Built files in `/assets/` are cached for a year, since their names change with every build.
+
+The Content-Security-Policy allows the one inline script in `index.html` by its hash. If you change that script, update the hash in `netlify.toml`. `npm test` fails until you do and shows the new hash.
+
+On the 1st and 15th of each month, a GitHub Action checks the HTTPS certificate and fails if it has less than 20 days left. GitHub emails you when it fails. Then check HTTPS under *Domain management* in Netlify.
 
 ## ⚖️ Legal
 
