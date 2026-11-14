@@ -27,6 +27,7 @@ export const skills: SkillGroup[] = [
       { name: "Node.js" },
       { name: "Pandas" },
       { name: "Plotly" },
+      { name: "Jupyter" },
       { name: "OSMnx" },
       { name: "Tauri", basic: true },
     ],
@@ -66,7 +67,7 @@ export const skills: SkillGroup[] = [
   {
     title: { en: "Transport & operations software", de: "Verkehrs- & Betriebssoftware" },
     skills: [
-      { name: "DRT platform configuration" },
+      { name: "ioki Platform" },
       { name: "HASTUS" },
       { name: "PTV Vissim" },
       { name: "PTV Visum" },
