@@ -69,7 +69,7 @@ export const skills: SkillGroup[] = [
     skills: [{ name: "macOS" }, { name: "Windows" }, { name: "Linux (CachyOS, KDE Plasma)", basic: true }],
   },
   {
-    title: { en: "Transport & operations software", de: "Verkehrs- & Betriebssoftware" },
+    title: { en: "Transport software", de: "Verkehrssoftware" },
     skills: [
       { name: "ioki Platform" },
       { name: "HASTUS" },
