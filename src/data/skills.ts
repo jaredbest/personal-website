@@ -66,7 +66,7 @@ export const skills: SkillGroup[] = [
   },
   {
     title: { en: "Operating systems", de: "Betriebssysteme" },
-    skills: [{ name: "Linux (CachyOS)", basic: true }],
+    skills: [{ name: "macOS" }, { name: "Windows" }, { name: "Linux (CachyOS, KDE Plasma)", basic: true }],
   },
   {
     title: { en: "Transport & operations software", de: "Verkehrs- & Betriebssoftware" },
